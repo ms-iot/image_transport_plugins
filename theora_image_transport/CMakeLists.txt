@@ -45,6 +45,11 @@ include_directories(include
   ${PC_THEORAENC_INCLUDE_DIRS}
   ${PC_THEORADEC_INCLUDE_DIRS})
 
+target_link_directories(${LIBRARY_NAME} PUBLIC
+  ${PC_OGG_LIBDIR}
+  ${PC_THEORAENC_LIBDIR}
+  )
+
 target_link_libraries(${LIBRARY_NAME}
   ${OpenCV_LIBRARIES}
   ${PC_OGG_LIBRARIES}
@@ -67,9 +72,15 @@ add_definitions(${PC_OGG_CFLAGS_OTHER}
                 ${PC_THEORADEC_CFLAGS_OTHER})
 
 add_executable(ogg_saver src/ogg_saver.cpp)
+
+target_link_directories(ogg_saver PUBLIC
+  ${PC_OGG_LIBDIR}
+  ${PC_THEORAENC_LIBDIR}
+  )
+
 target_link_libraries(ogg_saver ${PC_THEORA_LIBRARY} 
-                                ${PC_OGG_LIBRARY} 
-                                ${OpenCV_LIBRARIES} 
+                                ${PC_OGG_LIBRARY}
+                                ${OpenCV_LIBRARIES}
                                 ${PC_THEORAENC_LIBRARIES}
                                 ${PC_THEORADEC_LIBRARIES})
 
